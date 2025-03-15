@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Image Carousel</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 50%;
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="carousel-container">
+        <div class="carousel">
+            <img src="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg" alt="Mountain">
+            <img src="https://images.pexels.com/photos/302804/pexels-photo-302804.jpeg" alt="Forest">
+            <img src="https://images.pexels.com/photos/210186/pexels-photo-210186.jpeg" alt="Beach">
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <script>
+        let index = 0;
+        const slides = document.querySelectorAll(".carousel img");
+        const totalSlides = slides.length;
+
+        function showSlide(i) {
+            if (i >= totalSlides) index = 0;
+            else if (i < 0) index = totalSlides - 1;
+            else index = i;
+
+            document.querySelector(".carousel").style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        function nextSlide() { showSlide(index + 1); }
+        function prevSlide() { showSlide(index - 1); }
+    </script>
+
+</body>
+</html>
